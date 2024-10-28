@@ -56,9 +56,6 @@ const PlaySoloWithAI = () => {
         </div>
     );
 
-    // return (
-    //     <div>heiieieieei</div>
-    // )
 };
 
 export default PlaySoloWithAI;
