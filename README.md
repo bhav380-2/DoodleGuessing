@@ -1,4 +1,4 @@
-### Doodle Gussing Game
+# Doodle Gussing Game
 
 ## Play Now!! (Coming soon)
 ![Desktop Calculator Screenshot](./public/img/sc.png)
