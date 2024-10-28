@@ -1,38 +1,223 @@
-.App {
+/* App.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #f7f9fc, #e1ecf4);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 90vw;
+  margin: 25px auto; 
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  animation: fadeIn 0.5s ease-in-out;
+  min-height: 250px;
+}
+
+/* Title Styles */
+h1 {
   text-align: center;
+  font-size: 36px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h2 {
+  color: #2980b9;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Doodle Selector Styles */
+.doodle-selector {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.doodle-option {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #ecf7ff; /* Light background */
+  position: relative;
+  overflow: hidden;
+}
+
+.doodle-option:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Drawing Canvas Styles */
+/* .canvas-container {
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+canvas {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  background-color: #fff;
+} */
+
+.new{
+}
+
+ 
+.container .box1 button{
+  background-color: black;
+  color:white;
+  width:100%;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-top: 10px;
+
+
+} 
+
+
+
+/* Button Styles */
+/* .container .box1 .canvas-box button {
+  background-color: #3498db;
   color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 100%;
+  margin-top: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.container .box1 .canvas-box button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  
+} */
+
+/* Timer Styles */
+.timer {
+  font-size: 24px;
+  color: #e74c3c;
+  text-align: center;
+  margin: 10px 0;
 }
 
-@keyframes App-logo-spin {
+/* Score Card Styles */
+.score-card {
+  background-color: #e3f2fd;
+  border: 2px solid #90caf9;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.score-card h2 {
+  color: #2c3e50;
+}
+
+.score-card p {
+  font-size: 18px;
+  color: #333;
+}
+
+/* Flexbox for Score Card */
+.score-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+}
+
+/* Keyframe Animation */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+      opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+      opacity: 1;
   }
 }
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .doodle-selector {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .doodle-option {
+      margin-bottom: 10px;
+  }
+
+  button {
+      font-size: 16px;
+  }
+}
+
+
+
+
+
+
+
+
+.result{
+  height:auto;
+  min-height: 100px;
+  border:1px solid black;
+  padding:20px;
+  margin:5px;
+  font-size: 2rem;
+  font-weight: 500;
+  font-family:cursive;
+  background-color: rgb(43 125 131 / 90%);
+  color :white;
+}
+
+.result span:nth-child(1){
+  font-size:2.1 rem;
+  font-weight: 600;
+}
+
+
+
+.result span:nth-child(3){
+  padding:2px;
+  font-size:2.4rem;
+  font-weight:600;
+  font-family:sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+

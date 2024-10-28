@@ -1,0 +1,92 @@
+/* src/components/PlaySolo/PlaySolo.css */
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 800px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .toolbar {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .toolbar button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toolbar button:hover {
+    background-color: #0056b3;
+  }
+  
+  .toolbar button i {
+    margin-right: 5px;
+  }
+  
+  canvas {
+    border: 2px solid #000;
+    width: 100%;
+    height: calc(70vh - 40px);
+    touch-action: none;
+    background-color: #fff;
+    border-radius: 4px;
+  }
+
+  
+  
+  #result {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #555;
+  }
+  
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 1.5em;
+    }
+  
+    .toolbar button {
+      padding: 8px 16px;
+      font-size: 0.9em;
+    }
+  
+    canvas {
+      height: calc(60vh - 40px);
+    }
+  }
+  
