@@ -4,8 +4,8 @@ import axios from 'axios';
 import jimp from 'jimp';
 import Speech from 'speak-tts';
 import UIfx from 'uifx';
-
 import { Buffer } from 'buffer';
+import { predictDoodle } from '../utils/mlModel';
 
 export default class DrawingCanvas extends Component {
     constructor(props) {
@@ -18,15 +18,12 @@ export default class DrawingCanvas extends Component {
         this.myCanvas = React.createRef();
     }
 
-
-
     componentDidUpdate() {
         if (this.props.timer % 5 == 0) {
             console.log("predicting at time remainging : ", this.props.timer);
             this.getAnswer();
         }
     }
-
     // Convert URI to ImageData
     convertURIToImageData = (URI) => {
         return new Promise(function (resolve, reject) {
@@ -46,8 +43,9 @@ export default class DrawingCanvas extends Component {
 
     // Get the model's answer by processing the sketch
     getAnswer = async () => {
+        let data;
 
-        console.log("Hi")
+        console.log("Hi getAnsser at ",this.props.timer)
         const sketch = this.myCanvas.current.canvasContainer.children[1].toDataURL("image/png"); // Ensure MIME type is set
         this.convertURIToImageData(sketch)
             .then((sketchData) => {
@@ -59,48 +57,44 @@ export default class DrawingCanvas extends Component {
                         .resize(64, 64)
                         .getBase64(jimp.AUTO, (err, sketch28RGBA) => {
                             this.convertURIToImageData(sketch28RGBA)
-                                .then(sketch28RGBAdata => {
-                                    console.log(sketch28RGBAdata, "********************");
+                                .then(async (sketch28RGBAdata) => {
                                     let data = Object.values(sketch28RGBAdata['data']).map(value => value);
                                     let inputToModel = [];
                                     for (let i = 2; i < 16384; i += 4) {
                                         inputToModel.push(data[i] / 255);
                                         if (data[i] / 255 == 1) {
-                                            console.log("location : ", inputToModel.length)
                                         }
                                     }
-
-                                    console.log(inputToModel)
-
-                                    console.log(inputToModel.length)
-                                    console.log(inputToModel[0].length)
-                                    console.log("******************")
+                                    data = inputToModel;
+                                    let url = 'http://127.0.0.1:5000/predict'
+                                    console.log("send request")
+                                    const response = await axios.post(url, JSON.stringify(data), {
+                                        headers: {
+                                            'Content-Type': 'application/json' // Specify that you're sending JSON
+                                        }
+                                    });
+                                    console.log(response.data)
                                 });
                         });
                 });
             });
+
+
+
     }
     clearCanvas = () => {
         this.myCanvas.current.clear();
     }
-
     render() {
         const canvasStyle = {
             borderColor: 'aliceblue',
             borderStyle: 'inset',
             width: 'auto',
             height: "420px",
-            backgroundColor:'whiteSmoke',
-            // margin: 'auto'
-            border:'1px solid black',
-            boxShadow:'0.5px 0.5px 0.5px 0.5px'
+            backgroundColor: 'whiteSmoke',
+            border: '1px solid black',
+            boxShadow: '0.5px 0.5px 0.5px 0.5px'
         };
-
-        // setTimeout(() => {
-        //     this.getAnswer();
-        // }, 4000)
-
-
 
         return (
             <div>
@@ -117,28 +111,22 @@ export default class DrawingCanvas extends Component {
                     <button className="btn btn-outline-primary btn-md eraser" onClick={this.clearCanvas}>
                         <img width="40" height="40" alt="X" /> clear
                     </button>
-
-
-
                 </div>
 
 
                 <div className="result">
-
                     <span>
                         This is&nbsp;
                     </span>
 
                     <span>
-                         a cat, a dog , bat..,
+                        a cat, a dog , bat..,
                     </span>
 
                     <span>
                         a car
                     </span>
-
                 </div>
-
             </div>
         );
     }

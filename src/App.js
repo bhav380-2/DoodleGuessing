@@ -21,3 +21,6 @@ export default App;
 
 
     // "react-canvas-draw": "^1.1.1",
+
+
+    // "reactjs-popup": "^1.5.0",
