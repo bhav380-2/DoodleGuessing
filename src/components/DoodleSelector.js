@@ -1,28 +1,49 @@
 // DoodleSelector.js
 import React from 'react';
+import '../css/doodleSelector.css'
+import data from '../files/data.json'
 
 const DoodleSelector = ({ onSelect }) => {
-    const doodles = ['Cat', 'Dog', 'House'];
+    function getRandom(arr, num) {
+        const shuffled = arr.sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, num);
+    }
+
+   const doodles = getRandom(data.categories,3);
+    
 
     return (
-
         <>
-            <h1>Select Doodle you Want to draw</h1>
-            <div className="doodle-selector">
+            <div className='doodle-selector-container'>
 
-                {doodles.map((doodle) => (
-                    <div
-                        key={doodle}
-                        className="doodle-option"
-                        onClick={() => onSelect(doodle)}
-                    >
-                        {doodle}
-                    </div>
-                ))}
+                <h1 className='msg'>Select One Doodle</h1>
+                <div className="doodle-selector">
+
+                    {doodles.map((doodle) => (
+                        <div
+                            key={doodle}
+                            className="doodle-option"
+                            onClick={() => onSelect(doodle)}
+                        >
+                            {doodle}
+                        </div>
+                    ))}
+
+                </div>
+
+                <div className='icons'>
+                    <span className='pencil'>✏️</span>
+                    <span className='duck'>𓅭</span>
+                    <span className='i3'>𓍯𓂃𓏧♡</span>
+                    <span className='i4'>〰</span>
+                    <span className='i5'>𝔁𝓸𝔁𝓸</span>
+                    <span className='i6'>•ᴗ•</span>
+                </div>
+
+
             </div>
-        </>
 
+        </>
     );
 };
-
 export default DoodleSelector;

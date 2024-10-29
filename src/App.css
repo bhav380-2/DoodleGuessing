@@ -10,10 +10,11 @@ body {
 .container {
   max-width: 90vw;
   margin: 25px auto; 
+  margin-top:5%;
+
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  background-color: #ffffff;
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
   animation: fadeIn 0.5s ease-in-out;
   min-height: 250px;
 }
@@ -31,33 +32,6 @@ h2 {
   color: #2980b9;
   text-align: center;
   margin-bottom: 20px;
-}
-
-/* Doodle Selector Styles */
-.doodle-selector {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-}
-
-.doodle-option {
-  width: 100px;
-  height: 100px;
-  border: 2px solid #3498db;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-  background-color: #ecf7ff; /* Light background */
-  position: relative;
-  overflow: hidden;
-}
-
-.doodle-option:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Drawing Canvas Styles */

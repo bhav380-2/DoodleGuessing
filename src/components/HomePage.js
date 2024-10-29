@@ -25,7 +25,6 @@ const HomePage = () => {
                 </Link>
             </nav>
 
-
             <div className="box">
 
             </div>

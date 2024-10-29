@@ -44,7 +44,7 @@ const PlaySoloWithAI = () => {
                     ) : (
                         <div className="box1">
                             <h2>Draw: {selectedDoodle}</h2>
-                            <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} doodleSelected={setSelectedDoodle} />
+                            <Timer setIsPlaying={setIsPlaying} timeLeft={timeLeft} setTimeLeft={setTimeLeft} doodleSelected={setSelectedDoodle} />
                             <div className = "new">
                                 <DrawingCanvas timer={timeLeft} onDrawComplete={checkPrediction} />
                             </div>

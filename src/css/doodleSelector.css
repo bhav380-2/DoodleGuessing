@@ -1,0 +1,104 @@
+.doodle-selector-container{
+  border:1px solid black;
+  height:300px;
+  width:70%;
+  margin:auto;
+}
+
+
+
+.msg{
+    font-size:2.2rem;
+    letter-spacing: 2px;
+    color:black;
+    font-family: cursive;
+
+}
+
+.icons span{
+  position : absolute;
+
+}
+.pencil{
+  font-size: 8rem;
+  top:15%;
+  left:8%;
+}
+.duck{
+  font-size:6.5rem;
+  top:50%;
+  right:25%;
+  transform: rotate(18deg);
+}
+
+.i3{
+  font-size:5rem;
+  top:65%;
+  left:23%;
+  transform: rotate(133deg);
+}
+
+.i4{
+  font-size:3rem;
+  top:67%;
+  right:19%;
+  transform: rotate(155deg);
+}
+.i5{
+  font-size:4.7rem;
+  top:67%;
+  right:40%;
+  transform: rotate(45deg);
+}
+
+.i6{
+  font-size:4.5rem;
+  top:66%;
+  left:12%;
+  transform: rotate(14deg);
+}
+
+
+
+
+.doodle-selector{
+    background-color: none;
+}
+
+
+/* Doodle Selector Styles */
+.doodle-selector {
+    display: flex;
+    justify-content: space-around;
+    margin:auto;
+    margin-top:5.5%;
+    width:65%;
+  }
+  
+  .doodle-option {
+    text-transform: capitalize;
+    width: 95px;
+    height: 95px;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    padding:25px;
+    text-align: center;
+
+    background-color: black;
+    color:white;
+    font-size:1.25rem;
+    font-weight: bold;
+  }
+  
+  .doodle-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
