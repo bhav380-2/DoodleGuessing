@@ -4,49 +4,60 @@ import axios from 'axios';
 import jimp from 'jimp';
 import '../css/drawingCanvas.css';
 
-const DrawingCanvas = ({ nextRound, doodle,timer, setShowScoreCard }) => {
+const DrawingCanvas = ({ speak, voice1,voice2,nextRound, doodle, timer, setShowScoreCard }) => {
     const [prevResult, setPrevResult] = useState("");
     const [result, setResult] = useState('');
     const [prediction, setPrediction] = useState([]);
     const myCanvas = useRef();
-
+   
     // Use a ref to track already seen predictions
     const seenPredictions = useRef(new Set());
-
     useEffect(() => {
-        console.log(timer);
+        console.log(window.speechSynthesis.getVoices());
         if (timer % 4 === 0 && timer !== 40) {
             console.log("Predicting at time remaining: ", timer);
             getAnswer();
         }
     }, [timer]); // Effect depends on timer
 
+   
+
+
+    const handlePredictions = async () => {
+        for (let pred of prediction) {
+            pred = pred.replace('_',' ');
+            if (!seenPredictions.current.has(pred)) {
+
+                setPrevResult(prev => `${prev} a ${pred}, `);
+                seenPredictions.current.add(pred);
+                setResult(pred);
+                await speak("a " + pred, voice1);
+                if(pred==doodle){
+                    break;
+                }
+            }
+        }
+    };
+
+
     useEffect(() => {
         if (prediction.length > 0 && result!=doodle) {
-            // Update results after a new prediction is received
-            prediction.forEach((pred, index) => {
-                setTimeout(() => {
-                    if (!seenPredictions.current.has(pred)) {
-                        setPrevResult((prev) => `${prev} a ${pred}, `); // Append new prediction to prevResult
-                        seenPredictions.current.add(pred); // Add to seen predictions
-                        // Set result to the current prediction
-                        const p = result;
-                        setResult(`${pred}`); // Update result to the latest prediction
-                    }
-                },800 * index); // Delay for each prediction
-            });
+            handlePredictions()
+
         }
     }, [prediction]);
 
-    useEffect(()=>{
-        if(result==doodle && result!=''){
-            setTimeout(()=>{
-                alert("Hurrah !!!, guessed correctly. " + doodle);
+    useEffect(() => {
+        if (result === doodle && result !== '') {
+            setTimeout(async () => {
+                await speak('Hurrah !!!, guessed correctly.', voice2);
+                alert('press ok to continue')
                 nextRound();
-            },800)
+            }, 800);
         }
-    },[result])
-    
+    }, [result]);
+
+
     const convertURIToImageData = (URI) => {
         return new Promise((resolve, reject) => {
             if (URI == null) return reject();
@@ -119,12 +130,12 @@ const DrawingCanvas = ({ nextRound, doodle,timer, setShowScoreCard }) => {
             <div className="canvas-box">
                 <div className='button-container'>
                     <button className="btn btn-outline-primary btn-md eraser" onClick={clearCanvas}>
-                        <img width="10" height="10" alt=".." /> clear
+                    <i class="fa-solid fa-trash"></i> clear
                     </button>
                     <button className="btn btn-outline-primary btn-md eraser" onClick={clearCanvas}>
-                        <img width="10" height="10" alt="..." /> Erase
+                    <i class="fa-solid fa-eraser"></i> Erase
                     </button>
-                    <button onClick={() => setShowScoreCard(true)}>Stop Playing</button>
+                    <button onClick={() => setShowScoreCard(true)}><i class="fa-solid fa-stop"></i> Stop Play </button>
                 </div>
 
                 <CanvasDraw
@@ -140,8 +151,8 @@ const DrawingCanvas = ({ nextRound, doodle,timer, setShowScoreCard }) => {
                 <div className="result">
                     <h3>AI : Let me guess... </h3>
                     <span>This is&nbsp;</span>
-                    <span>{prevResult.lastIndexOf(" a ")!=-1?prevResult.substring(0, prevResult.lastIndexOf(" a ")).trim():""}</span>
-                    <span>{" a "+result}</span>
+                    <span>{prevResult.lastIndexOf(" a ") != -1 ? prevResult.substring(0, prevResult.lastIndexOf(" a ")).trim() : ""}</span>
+                    <span>{" a " + result}</span>
                     {/* {doodle==result?()=>{alert("Hurrah! guessed correctly..."+result);nextRound()}:""} */}
                 </div>
             </div>

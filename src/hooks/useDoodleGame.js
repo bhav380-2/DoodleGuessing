@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useRef} from 'react';
 import { predictDoodle } from '../utils/mlModel';
 
 export const useDoodleGame = (drawingData) => {
@@ -7,7 +7,9 @@ export const useDoodleGame = (drawingData) => {
     const [incorrectAttempts, setIncorrectAttempts] = useState(0);
     const [timeLeft, setTimeLeft] = useState(40);
     const [isPlaying, setIsPlaying] = useState(false);
-
+    let voice1 = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google US English');
+    let voice2 = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google UK English Male');
+    const isSpeaking = useRef(false);  
     useEffect(() => {
         let timer;
         if (isPlaying) {
@@ -44,7 +46,20 @@ export const useDoodleGame = (drawingData) => {
         setIsPlaying(false);
     };
 
+    const speak = (text, voice) => {
+        return new Promise((resolve) => {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = voice;
+            utterance.onend = () => {
+                isSpeaking.current = false;
+                resolve();
+            };
+            window.speechSynthesis.speak(utterance);
+            isSpeaking.current = true;
+        });
+    };
+
    
 
-    return { score, correctAttempts, incorrectAttempts, timeLeft, checkPrediction, setIsPlaying, resetGame, setTimeLeft };
+    return { score, correctAttempts, incorrectAttempts, timeLeft, checkPrediction, setIsPlaying, resetGame, setTimeLeft,speak,voice1,voice2 };
 };
