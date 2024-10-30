@@ -1,4 +1,7 @@
 # Doodle Gussing Game
-
-## Play Now!! (Coming soon)
 ![Desktop Calculator Screenshot](./public/img/sc.png)
+
+
+## Accuracy above 85%
+![Desktop Calculator Screenshot](./public/img/sc3.png)
+
