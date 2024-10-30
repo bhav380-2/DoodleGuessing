@@ -4,6 +4,7 @@ import DrawingCanvas from './DrawingCanvas';
 import ScoreCard from './ScoreCard';
 import Timer from './Timer';
 import { useDoodleGame } from '../hooks/useDoodleGame.js';
+import '../css/PlaySolo.css';
 
 const PlaySoloWithAI = () => {
 
@@ -46,9 +47,8 @@ const PlaySoloWithAI = () => {
                             <h2>Draw: {selectedDoodle}</h2>
                             <Timer setIsPlaying={setIsPlaying} timeLeft={timeLeft} setTimeLeft={setTimeLeft} doodleSelected={setSelectedDoodle} />
                             <div className = "new">
-                                <DrawingCanvas timer={timeLeft} onDrawComplete={checkPrediction} />
+                                <DrawingCanvas setShowScoreCard={setShowScoreCard} timer={timeLeft} onDrawComplete={checkPrediction} />
                             </div>
-                            <button onClick={() => setShowScoreCard(true)}>Stop Playing</button>
                         </div>
                     )}
                 </>

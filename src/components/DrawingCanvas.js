@@ -1,37 +1,52 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CanvasDraw from 'react-canvas-draw';
 import axios from 'axios';
 import jimp from 'jimp';
-import Speech from 'speak-tts';
-import UIfx from 'uifx';
-import { Buffer } from 'buffer';
-import { predictDoodle } from '../utils/mlModel';
+import '../css/drawingCanvas.css';
 
-export default class DrawingCanvas extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            playerChoice: "",
-            modelGuess: "",
-            seconds: 20
-        };
-        this.myCanvas = React.createRef();
-    }
+const DrawingCanvas = ({ timer, setShowScoreCard }) => {
+    const [prevResult, setPrevResult] = useState("");
+    const [result, setResult] = useState('');
+    const [prediction, setPrediction] = useState([]);
+    const myCanvas = useRef();
 
-    componentDidUpdate() {
-        if (this.props.timer % 5 == 0) {
-            console.log("predicting at time remainging : ", this.props.timer);
-            this.getAnswer();
+    // Use a ref to track already seen predictions
+    const seenPredictions = useRef(new Set());
+
+    useEffect(() => {
+        console.log(timer);
+        if (timer % 4 === 0 && timer !== 40) {
+            console.log("Predicting at time remaining: ", timer);
+            getAnswer();
         }
-    }
-    // Convert URI to ImageData
-    convertURIToImageData = (URI) => {
-        return new Promise(function (resolve, reject) {
+    }, [timer]); // Effect depends on timer
+
+    useEffect(() => {
+        if (prediction.length > 0) {
+            // Update results after a new prediction is received
+            prediction.forEach((pred, index) => {
+                setTimeout(() => {
+                    if (!seenPredictions.current.has(pred)) {
+                        setPrevResult((prev) => `${prev} a ${pred}, `); // Append new prediction to prevResult
+                        seenPredictions.current.add(pred); // Add to seen predictions
+    
+                        // Set result to the current prediction
+                        const p = result;
+                        setResult(` a ${pred}`); // Update result to the latest prediction
+
+                    }
+                },800 * index); // Delay for each prediction
+            });
+        }
+    }, [prediction]);
+    
+    const convertURIToImageData = (URI) => {
+        return new Promise((resolve, reject) => {
             if (URI == null) return reject();
-            var canvas = document.createElement('canvas'),
-                context = canvas.getContext('2d'),
-                image = new Image();
-            image.addEventListener('load', function () {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            const image = new Image();
+            image.addEventListener('load', () => {
                 canvas.width = image.width;
                 canvas.height = image.height;
                 context.drawImage(image, 0, 0, canvas.width, canvas.height);
@@ -39,95 +54,90 @@ export default class DrawingCanvas extends Component {
             }, false);
             image.src = URI;
         });
-    }
+    };
 
-    // Get the model's answer by processing the sketch
-    getAnswer = async () => {
-        let data;
+    const getAnswer = async () => {
+        const sketch = myCanvas.current.canvasContainer.children[1].toDataURL("image/png");
+        try {
+            const sketchData = await convertURIToImageData(sketch);
+            const jimpImage = await jimp.read(sketchData);
+            jimpImage.resize(64, 64, jimp.RESIZE_BEZIER);
+            const buffer = await jimpImage.getBufferAsync(jimp.MIME_PNG);
+            const base64 = buffer.toString('base64');
+            const sketchDataURL = `data:image/png;base64,${base64}`;
+            const sketch28RGBAdata = await convertURIToImageData(sketchDataURL);
 
-        console.log("Hi getAnsser at ",this.props.timer)
-        const sketch = this.myCanvas.current.canvasContainer.children[1].toDataURL("image/png"); // Ensure MIME type is set
-        this.convertURIToImageData(sketch)
-            .then((sketchData) => {
-                console.log(sketchData)
-                jimp.read(sketchData, (err, sketchConvert) => {
-                    console.log(sketchConvert, "converted")
-                    if (err) throw err;
-                    sketchConvert
-                        .resize(64, 64)
-                        .getBase64(jimp.AUTO, (err, sketch28RGBA) => {
-                            this.convertURIToImageData(sketch28RGBA)
-                                .then(async (sketch28RGBAdata) => {
-                                    let data = Object.values(sketch28RGBAdata['data']).map(value => value);
-                                    let inputToModel = [];
-                                    for (let i = 2; i < 16384; i += 4) {
-                                        inputToModel.push(data[i] / 255);
-                                        if (data[i] / 255 == 1) {
-                                        }
-                                    }
-                                    data = inputToModel;
-                                    let url = 'http://127.0.0.1:5000/predict'
-                                    console.log("send request")
-                                    const response = await axios.post(url, JSON.stringify(data), {
-                                        headers: {
-                                            'Content-Type': 'application/json' // Specify that you're sending JSON
-                                        }
-                                    });
-                                    console.log(response.data)
-                                });
-                        });
-                });
+            const data = Array.from(sketch28RGBAdata.data).filter((_, i) => i % 4 !== 3); // Keep only R, G, B channels
+            const grayData = data.reduce((acc, _, i) => {
+                if (i % 3 === 0) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+                    acc.push(Math.round(b / 255)); // Normalize to [0, 1]
+                }
+                return acc;
+            }, []);
+
+            const url = 'http://127.0.0.1:5000/predict';
+            const response = await axios.post(url, JSON.stringify(grayData), {
+                headers: { 'Content-Type': 'application/json' }
             });
 
+            setPrediction(response.data);
+            console.log("Predictions received: ", response.data);
+        } catch (error) {
+            console.error("Error in getAnswer:", error);
+        }
+    };
 
+    const clearCanvas = () => {
+        myCanvas.current.clear();
+        setPrevResult(""); // Clear previous results
+        seenPredictions.current.clear(); // Reset seen predictions
+    };
 
-    }
-    clearCanvas = () => {
-        this.myCanvas.current.clear();
-    }
-    render() {
-        const canvasStyle = {
-            borderColor: 'aliceblue',
-            borderStyle: 'inset',
-            width: 'auto',
-            height: "420px",
-            backgroundColor: 'whiteSmoke',
-            border: '1px solid black',
-            boxShadow: '0.5px 0.5px 0.5px 0.5px'
-        };
+    const canvasStyle = {
+        borderColor: 'aliceblue',
+        borderStyle: 'inset',
+        width: '70vh',
+        height: "65vh",
+        backgroundColor: 'whiteSmoke',
+        border: '1px solid black',
+        boxShadow: '0.5px 0.5px 0.5px 0.5px',
+    };
 
-        return (
-            <div>
-                <div className="canvas-box d-flex justify-content-center align-items-center" >
-                    <CanvasDraw
-                        resize="false"
-                        lazyRadius={0}
-                        brushRadius={2}
-                        brushColor={"rgb(0,0,255)"}
-                        hideGrid={true}
-                        style={canvasStyle}
-                        ref={this.myCanvas}
-                    />
-                    <button className="btn btn-outline-primary btn-md eraser" onClick={this.clearCanvas}>
-                        <img width="40" height="40" alt="X" /> clear
+    return (
+        <div>
+            <div className="canvas-box">
+                <div className='button-container'>
+                    <button className="btn btn-outline-primary btn-md eraser" onClick={clearCanvas}>
+                        <img width="10" height="10" alt=".." /> clear
                     </button>
+                    <button className="btn btn-outline-primary btn-md eraser" onClick={clearCanvas}>
+                        <img width="10" height="10" alt="..." /> Erase
+                    </button>
+                    <button onClick={() => setShowScoreCard(true)}>Stop Playing</button>
                 </div>
 
+                <CanvasDraw
+                    resize="false"
+                    lazyRadius={0}
+                    brushRadius={0.8}
+                    brushColor={"rgb(0,0,255)"}
+                    hideGrid={true}
+                    style={canvasStyle}
+                    ref={myCanvas}
+                />
 
                 <div className="result">
-                    <span>
-                        This is&nbsp;
-                    </span>
-
-                    <span>
-                        a cat, a dog , bat..,
-                    </span>
-
-                    <span>
-                        a car
-                    </span>
+                    <h3>AI : Let me guess... </h3>
+                    <span>This is&nbsp;</span>
+                    <span>{prevResult.lastIndexOf(" a ")!=-1?prevResult.substring(0, prevResult.lastIndexOf(" a ")).trim():""}</span>
+                    <span>{result}</span>
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
+
+export default DrawingCanvas;

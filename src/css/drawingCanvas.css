@@ -1,0 +1,42 @@
+.button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-right:20px;
+    margin-top : 5px;
+}
+
+.button-container button{
+    font-size:1rem;
+}
+
+.canvas-box{
+    display:flex;
+    justify-content: center;
+}
+
+.result{
+    height:auto;
+    width:75vh;
+    min-height: 100px;
+    border:1px solid black;
+    padding:20px;
+    font-size: 2rem;
+    font-weight: 500;
+    font-family:cursive;
+    background-color: rgb(43 125 131 / 90%);
+    color :white;
+  }
+  
+  .result span:nth-child(2){
+    font-size:2.1 rem;
+    font-weight: 600;
+  }
+  
+  .result span:nth-child(4){
+    padding:2px;
+    font-size:2.4rem;
+    font-weight:600;
+    font-family:sans-serif;
+  }

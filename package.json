@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
     "@tensorflow/tfjs": "^4.22.0",
     "@tensorflow/tfjs-node": "^2.0.1",
     "@testing-library/jest-dom": "^4.2.4",
@@ -11,7 +12,11 @@
     "aws-sdk": "^2.715.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
+    "class-variance-authority": "^0.7.0",
+    "classnames": "^2.5.1",
+    "get-pixels": "^3.3.3",
     "jimp": "^0.14.0",
+    "lucide-react": "^0.454.0",
     "node-gyp": "^7.0.0",
     "node-pre-gyp": "^0.15.0",
     "react": "^18.3.1",
@@ -19,6 +24,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
+    "react-sketch-canvas": "^6.2.0",
     "speak-tts": "^2.0.8",
     "uifx": "^2.0.7"
   },

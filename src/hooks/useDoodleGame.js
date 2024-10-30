@@ -5,7 +5,7 @@ export const useDoodleGame = (drawingData) => {
     const [score, setScore] = useState(0);
     const [correctAttempts, setCorrectAttempts] = useState(0);
     const [incorrectAttempts, setIncorrectAttempts] = useState(0);
-    const [timeLeft, setTimeLeft] = useState(30);
+    const [timeLeft, setTimeLeft] = useState(40);
     const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
