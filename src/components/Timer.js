@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 
-const Timer = ({ timeLeft,doodleSelected, setTimeLeft, setIsPlaying}) => {
+const Timer = ({ nextRound,timeLeft}) => {
     
     useEffect(()=>{
         if(timeLeft==0){
             console.log("hi");
             alert('Failed to Guesss, Better luck next Time!!! ...,')
-            doodleSelected(null);
-            setTimeLeft(40);
-            setIsPlaying(false);
-
+            nextRound();
         }
     },[timeLeft])
 

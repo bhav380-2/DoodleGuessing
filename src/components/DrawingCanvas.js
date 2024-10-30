@@ -4,7 +4,7 @@ import axios from 'axios';
 import jimp from 'jimp';
 import '../css/drawingCanvas.css';
 
-const DrawingCanvas = ({ timer, setShowScoreCard }) => {
+const DrawingCanvas = ({ nextRound, doodle,timer, setShowScoreCard }) => {
     const [prevResult, setPrevResult] = useState("");
     const [result, setResult] = useState('');
     const [prediction, setPrediction] = useState([]);
@@ -22,23 +22,30 @@ const DrawingCanvas = ({ timer, setShowScoreCard }) => {
     }, [timer]); // Effect depends on timer
 
     useEffect(() => {
-        if (prediction.length > 0) {
+        if (prediction.length > 0 && result!=doodle) {
             // Update results after a new prediction is received
             prediction.forEach((pred, index) => {
                 setTimeout(() => {
                     if (!seenPredictions.current.has(pred)) {
                         setPrevResult((prev) => `${prev} a ${pred}, `); // Append new prediction to prevResult
                         seenPredictions.current.add(pred); // Add to seen predictions
-    
                         // Set result to the current prediction
                         const p = result;
-                        setResult(` a ${pred}`); // Update result to the latest prediction
-
+                        setResult(`${pred}`); // Update result to the latest prediction
                     }
                 },800 * index); // Delay for each prediction
             });
         }
     }, [prediction]);
+
+    useEffect(()=>{
+        if(result==doodle && result!=''){
+            setTimeout(()=>{
+                alert("Hurrah !!!, guessed correctly. " + doodle);
+                nextRound();
+            },800)
+        }
+    },[result])
     
     const convertURIToImageData = (URI) => {
         return new Promise((resolve, reject) => {
@@ -84,6 +91,7 @@ const DrawingCanvas = ({ timer, setShowScoreCard }) => {
             });
 
             setPrediction(response.data);
+
             console.log("Predictions received: ", response.data);
         } catch (error) {
             console.error("Error in getAnswer:", error);
@@ -133,7 +141,8 @@ const DrawingCanvas = ({ timer, setShowScoreCard }) => {
                     <h3>AI : Let me guess... </h3>
                     <span>This is&nbsp;</span>
                     <span>{prevResult.lastIndexOf(" a ")!=-1?prevResult.substring(0, prevResult.lastIndexOf(" a ")).trim():""}</span>
-                    <span>{result}</span>
+                    <span>{" a "+result}</span>
+                    {/* {doodle==result?()=>{alert("Hurrah! guessed correctly..."+result);nextRound()}:""} */}
                 </div>
             </div>
         </div>

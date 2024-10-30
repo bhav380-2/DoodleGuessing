@@ -28,6 +28,11 @@ const PlaySoloWithAI = () => {
         setSelectedDoodle(doodle);
         setIsPlaying(true);
     };
+    const nextRound = () => {
+        setSelectedDoodle(null);
+        setTimeLeft(40);
+        setIsPlaying(false);
+    }
 
     return (
         <div className="container">
@@ -45,9 +50,9 @@ const PlaySoloWithAI = () => {
                     ) : (
                         <div className="box1">
                             <h2>Draw: {selectedDoodle}</h2>
-                            <Timer setIsPlaying={setIsPlaying} timeLeft={timeLeft} setTimeLeft={setTimeLeft} doodleSelected={setSelectedDoodle} />
+                            <Timer timeLeft={timeLeft} nextRound={nextRound} />
                             <div className = "new">
-                                <DrawingCanvas setShowScoreCard={setShowScoreCard} timer={timeLeft} onDrawComplete={checkPrediction} />
+                                <DrawingCanvas nextRound ={nextRound} doodle={selectedDoodle} setShowScoreCard={setShowScoreCard} timer={timeLeft} onDrawComplete={checkPrediction} />
                             </div>
                         </div>
                     )}

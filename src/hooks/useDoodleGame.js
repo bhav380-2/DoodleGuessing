@@ -44,5 +44,7 @@ export const useDoodleGame = (drawingData) => {
         setIsPlaying(false);
     };
 
-    return { score, correctAttempts, incorrectAttempts, timeLeft, checkPrediction, setIsPlaying, resetGame ,setTimeLeft};
+   
+
+    return { score, correctAttempts, incorrectAttempts, timeLeft, checkPrediction, setIsPlaying, resetGame, setTimeLeft };
 };
