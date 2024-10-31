@@ -3,19 +3,19 @@ import React from 'react';
 import '../css/doodleSelector.css'
 import data from '../files/data.json'
 
-const DoodleSelector = ({ onSelect }) => {
+const DoodleSelector = ({ round,totalRounds, onSelect }) => {
     function getRandom(arr, num) {
         const shuffled = arr.sort(() => 0.5 - Math.random());
         return shuffled.slice(0, num);
     }
 
    const doodles = getRandom(data.categories,3);
-    
 
     return (
         <>
             <div className='doodle-selector-container'>
 
+                <h3>Round : {round}/{totalRounds}</h3>
                 <h1 className='msg'>Select One Doodle</h1>
                 <div className="doodle-selector">
 

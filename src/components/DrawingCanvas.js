@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Redirect } from "react-router-dom";
+
 import CanvasDraw from 'react-canvas-draw';
 import axios from 'axios';
 import jimp from 'jimp';
 import '../css/drawingCanvas.css';
 
-const DrawingCanvas = ({ speak, voice1,voice2,nextRound, doodle, timer, setShowScoreCard }) => {
+const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setShowScoreCard, setScore, setTotalRounds, round }) => {
     const [prevResult, setPrevResult] = useState("");
     const [result, setResult] = useState('');
     const [prediction, setPrediction] = useState([]);
     const myCanvas = useRef();
-   
+
     // Use a ref to track already seen predictions
     const seenPredictions = useRef(new Set());
     useEffect(() => {
@@ -20,19 +22,19 @@ const DrawingCanvas = ({ speak, voice1,voice2,nextRound, doodle, timer, setShowS
         }
     }, [timer]); // Effect depends on timer
 
-   
+
 
 
     const handlePredictions = async () => {
         for (let pred of prediction) {
-            pred = pred.replace('_',' ');
+            pred = pred.replace('_', ' ');
             if (!seenPredictions.current.has(pred)) {
 
                 setPrevResult(prev => `${prev} a ${pred}, `);
                 seenPredictions.current.add(pred);
                 setResult(pred);
                 await speak("a " + pred, voice1);
-                if(pred==doodle){
+                if (pred == doodle) {
                     break;
                 }
             }
@@ -41,7 +43,7 @@ const DrawingCanvas = ({ speak, voice1,voice2,nextRound, doodle, timer, setShowS
 
 
     useEffect(() => {
-        if (prediction.length > 0 && result!=doodle) {
+        if (prediction.length > 0 && result != doodle) {
             handlePredictions()
 
         }
@@ -51,6 +53,8 @@ const DrawingCanvas = ({ speak, voice1,voice2,nextRound, doodle, timer, setShowS
         if (result === doodle && result !== '') {
             setTimeout(async () => {
                 await speak('Hurrah !!!, guessed correctly.', voice2);
+                setScore(prev => prev + 1);
+
                 alert('press ok to continue')
                 nextRound();
             }, 800);
@@ -125,17 +129,26 @@ const DrawingCanvas = ({ speak, voice1,voice2,nextRound, doodle, timer, setShowS
         boxShadow: '0.5px 0.5px 0.5px 0.5px',
     };
 
+    const stopPlay = () => {
+
+        setShowScoreCard(true);
+        setTotalRounds((prev) => round);
+        setTimeout(() => {
+            nextRound();
+        },3000)
+    }
+
     return (
         <div>
             <div className="canvas-box">
                 <div className='button-container'>
                     <button className="btn btn-outline-primary btn-md eraser" onClick={clearCanvas}>
-                    <i class="fa-solid fa-trash"></i> clear
+                        <i class="fa-solid fa-trash"></i> clear
                     </button>
                     <button className="btn btn-outline-primary btn-md eraser" onClick={clearCanvas}>
-                    <i class="fa-solid fa-eraser"></i> Erase
+                        <i class="fa-solid fa-eraser"></i> Erase
                     </button>
-                    <button onClick={() => setShowScoreCard(true)}><i class="fa-solid fa-stop"></i> Stop Play </button>
+                    <button onClick={() => stopPlay()}><i class="fa-solid fa-stop"></i> Stop Play </button>
                 </div>
 
                 <CanvasDraw

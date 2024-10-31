@@ -1,10 +1,13 @@
 import { useState, useEffect,useRef} from 'react';
 import { predictDoodle } from '../utils/mlModel';
 
-export const useDoodleGame = (drawingData) => {
-    const [score, setScore] = useState(0);
-    const [correctAttempts, setCorrectAttempts] = useState(0);
-    const [incorrectAttempts, setIncorrectAttempts] = useState(0);
+export const useDoodleGame = () => {
+
+    const [selectedDoodle, setSelectedDoodle] = useState(null);
+    const [showScoreCard, setShowScoreCard] = useState(false);
+    const [score,setScore] = useState(0);
+    const [totalRounds,setTotalRounds] = useState(5);
+    const [round,setRound] = useState(1);
     const [timeLeft, setTimeLeft] = useState(40);
     const [isPlaying, setIsPlaying] = useState(false);
     let voice1 = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google US English');
@@ -26,25 +29,19 @@ export const useDoodleGame = (drawingData) => {
         return () => clearInterval(timer);
     }, [isPlaying]);
 
-    const checkPrediction = async () => {
-        const guesses = await predictDoodle(drawingData);
-        // Compare guesses with the correct answer and update score
-        // This is just an example, you'll need to implement actual scoring logic.
-        if (guesses[0].label === drawingData) {
-            setScore((prev) => prev + 1);
-            setCorrectAttempts((prev) => prev + 1);
-        } else {
-            setIncorrectAttempts((prev) => prev + 1);
-        }
-    };
+    // const checkPrediction = async () => {
+    //     const guesses = await predictDoodle(drawingData);
+    //     // Compare guesses with the correct answer and update score
+    //     // This is just an example, you'll need to implement actual scoring logic.
+    //     if (guesses[0].label === drawingData) {
+    //         setScore((prev) => prev + 1);
+    //         setCorrectAttempts((prev) => prev + 1);
+    //     } else {
+    //         setIncorrectAttempts((prev) => prev + 1);
+    //     }
+    // };
 
-    const resetGame = () => {
-        setScore(0);
-        setCorrectAttempts(0);
-        setIncorrectAttempts(0);
-        setTimeLeft(30);
-        setIsPlaying(false);
-    };
+   
 
     const speak = (text, voice) => {
         return new Promise((resolve) => {
@@ -61,5 +58,5 @@ export const useDoodleGame = (drawingData) => {
 
    
 
-    return { score, correctAttempts, incorrectAttempts, timeLeft, checkPrediction, setIsPlaying, resetGame, setTimeLeft,speak,voice1,voice2 };
+    return {selectedDoodle,setSelectedDoodle,showScoreCard,setShowScoreCard,setTotalRounds, score, timeLeft, totalRounds,round,setRound,setScore, setIsPlaying, setTimeLeft,speak,voice1,voice2 };
 };

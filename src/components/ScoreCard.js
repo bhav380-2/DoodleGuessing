@@ -1,16 +1,18 @@
 // ScoreCard.js
 import React from 'react';
-
-const ScoreCard = ({ score, correctAttempts, incorrectAttempts, resetGame }) => {
+import { Link } from "react-router-dom"
+const ScoreCard = ({ setScore,score,totalRounds }) => {
     return (
         <div className="score-card">
             <h2>Score Card</h2>
             <div className="score-stats">
-                <p>Score: {score}</p>
-                <p>Correct Attempts: {correctAttempts}</p>
-                <p>Incorrect Attempts: {incorrectAttempts}</p>
+                <p>Score: {score}/{totalRounds}</p>
             </div>
-            <button onClick={resetGame}>Play Again</button>
+            <Link className="home-page" to="/">
+                    <button onClick={()=>setScore(0)}>
+                       Continue
+                    </button>
+                </Link>
         </div>
     );
 };

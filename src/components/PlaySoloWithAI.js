@@ -11,27 +11,37 @@ const PlaySoloWithAI = () => {
     const nefw = 3;
 
 
-    const [selectedDoodle, setSelectedDoodle] = useState(null);
-    const [showScoreCard, setShowScoreCard] = useState(false);
     const {
+        selectedDoodle,
+        setSelectedDoodle,
         score,
-        correctAttempts,
-        incorrectAttempts,
+        setScore,
+        totalRounds,
+        round,
+        setRound,
         timeLeft,
         setTimeLeft,
         checkPrediction,
         setIsPlaying,
-        resetGame,
         speak,
+        showScoreCard,
+        setShowScoreCard,
         voice1,
-        voice2
-    } = useDoodleGame(selectedDoodle);
+        voice2,
+        setTotalRounds
+    } = useDoodleGame();
 
     const handleDoodleSelect = (doodle) => {
         setSelectedDoodle(doodle);
         setIsPlaying(true);
     };
     const nextRound = () => {
+
+        if(round==totalRounds){
+            setShowScoreCard(true);
+            setRound(1);
+        }else 
+            setRound((prev)=>prev+1);
         setSelectedDoodle(null);
         setTimeLeft(40);
         setIsPlaying(false);
@@ -42,20 +52,19 @@ const PlaySoloWithAI = () => {
             {showScoreCard ? (
                 <ScoreCard
                     score={score}
-                    correctAttempts={correctAttempts}
-                    incorrectAttempts={incorrectAttempts}
-                    resetGame={() => setShowScoreCard(false)}
+                    totalRounds = {totalRounds}
+                    setScore = {setScore}
                 />
             ) : (
                 <>
                     {!selectedDoodle ? (
-                        <DoodleSelector onSelect={handleDoodleSelect} />
+                        <DoodleSelector round = {round} totalRounds={totalRounds} onSelect={handleDoodleSelect} />
                     ) : (
                         <div className="box1">
                             <h2>Draw: {selectedDoodle}</h2>
                             <Timer speak={speak} voice2={voice2} timeLeft={timeLeft} nextRound={nextRound} />
                             <div className = "new">
-                                <DrawingCanvas speak={speak} voice1={voice1} voice2={voice2} nextRound ={nextRound} doodle={selectedDoodle} setShowScoreCard={setShowScoreCard} timer={timeLeft} onDrawComplete={checkPrediction} />
+                                <DrawingCanvas round= {round} setTotalRounds= {setTotalRounds} setScore={setScore} speak={speak} voice1={voice1} voice2={voice2} nextRound ={nextRound} doodle={selectedDoodle} setShowScoreCard={setShowScoreCard} timer={timeLeft} onDrawComplete={checkPrediction} />
                             </div>
                         </div>
                     )}
