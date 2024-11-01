@@ -3,5 +3,8 @@
 
 
 ## Accuracy above 85%
-![Desktop Calculator Screenshot](./public/img/sc3.png)
+![Ml model Prediction](./public/img/sc3.png)
+
+## Trolling Bot
+![Trolling Bot](./public/img/sc5.png)
 

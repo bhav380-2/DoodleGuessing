@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
     return (
         <div className="home-container">
-
             <header className="homepage-header">
                 <h1>	<span className="e1">&#9889; </span>Guess &#9997; Doodles     </h1>
                 <div className="icons">
@@ -13,7 +12,6 @@ const HomePage = () => {
                     <span className="i2">ᝰ.ᐟ</span>
                     <span className="i3">꩜</span>
                 </div>
-
             </header>
 
             <nav className="buttons-container">
@@ -24,14 +22,9 @@ const HomePage = () => {
                     <button>Multiplayer</button>
                 </Link>
             </nav>
-
             <div className="box">
-
             </div>
-
-
         </div>
     );
 };
-
 export default HomePage;

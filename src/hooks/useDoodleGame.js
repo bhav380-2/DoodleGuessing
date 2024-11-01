@@ -2,7 +2,6 @@ import { useState, useEffect,useRef} from 'react';
 import { predictDoodle } from '../utils/mlModel';
 
 export const useDoodleGame = () => {
-
     const [selectedDoodle, setSelectedDoodle] = useState(null);
     const [showScoreCard, setShowScoreCard] = useState(false);
     const [score,setScore] = useState(0);
@@ -12,6 +11,7 @@ export const useDoodleGame = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     let voice1 = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google US English');
     let voice2 = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google UK English Male');
+    let voice3 = window.speechSynthesis.getVoices().find(voice => voice.name.includes('Google') && voice.lang === 'hi-IN');
     const isSpeaking = useRef(false);  
     useEffect(() => {
         let timer;
@@ -29,25 +29,12 @@ export const useDoodleGame = () => {
         return () => clearInterval(timer);
     }, [isPlaying]);
 
-    // const checkPrediction = async () => {
-    //     const guesses = await predictDoodle(drawingData);
-    //     // Compare guesses with the correct answer and update score
-    //     // This is just an example, you'll need to implement actual scoring logic.
-    //     if (guesses[0].label === drawingData) {
-    //         setScore((prev) => prev + 1);
-    //         setCorrectAttempts((prev) => prev + 1);
-    //     } else {
-    //         setIncorrectAttempts((prev) => prev + 1);
-    //     }
-    // };
-
-   
-
     const speak = (text, voice) => {
         return new Promise((resolve) => {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.voice = voice;
             utterance.onend = () => {
+                
                 isSpeaking.current = false;
                 resolve();
             };
@@ -55,8 +42,5 @@ export const useDoodleGame = () => {
             isSpeaking.current = true;
         });
     };
-
-   
-
-    return {selectedDoodle,setSelectedDoodle,showScoreCard,setShowScoreCard,setTotalRounds, score, timeLeft, totalRounds,round,setRound,setScore, setIsPlaying, setTimeLeft,speak,voice1,voice2 };
+    return {voice3, isSpeaking,selectedDoodle,setSelectedDoodle,showScoreCard,setShowScoreCard,setTotalRounds, score, timeLeft, totalRounds,round,setRound,setScore, setIsPlaying, setTimeLeft,speak,voice1,voice2 };
 };

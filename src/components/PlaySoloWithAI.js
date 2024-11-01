@@ -7,10 +7,7 @@ import { useDoodleGame } from '../hooks/useDoodleGame.js';
 import '../css/PlaySolo.css';
 
 const PlaySoloWithAI = () => {
-
     const nefw = 3;
-
-
     const {
         selectedDoodle,
         setSelectedDoodle,
@@ -28,6 +25,8 @@ const PlaySoloWithAI = () => {
         setShowScoreCard,
         voice1,
         voice2,
+        voice3,
+        isSpeaking,
         setTotalRounds
     } = useDoodleGame();
 
@@ -36,7 +35,6 @@ const PlaySoloWithAI = () => {
         setIsPlaying(true);
     };
     const nextRound = () => {
-
         if(round==totalRounds){
             setShowScoreCard(true);
             setRound(1);
@@ -51,6 +49,10 @@ const PlaySoloWithAI = () => {
         <div className="container">
             {showScoreCard ? (
                 <ScoreCard
+                    isSpeaking ={isSpeaking}
+                    voice1 = {voice1}
+                    voice2 = {voice2}
+                    voice3 = {voice3}
                     score={score}
                     totalRounds = {totalRounds}
                     setScore = {setScore}
@@ -62,7 +64,13 @@ const PlaySoloWithAI = () => {
                     ) : (
                         <div className="box1">
                             <h2>Draw: {selectedDoodle}</h2>
-                            <Timer speak={speak} voice2={voice2} timeLeft={timeLeft} nextRound={nextRound} />
+                            <Timer  isSpeaking ={isSpeaking}
+                                voice1 = {voice1}
+                                voice2 = {voice2}
+                                voice3 = {voice3}
+                                score={score}
+                                totalRounds = {totalRounds}
+                                setScore = {setScore} speak={speak} timeLeft={timeLeft} nextRound={nextRound} />
                             <div className = "new">
                                 <DrawingCanvas round= {round} setTotalRounds= {setTotalRounds} setScore={setScore} speak={speak} voice1={voice1} voice2={voice2} nextRound ={nextRound} doodle={selectedDoodle} setShowScoreCard={setShowScoreCard} timer={timeLeft} onDrawComplete={checkPrediction} />
                             </div>
@@ -72,7 +80,5 @@ const PlaySoloWithAI = () => {
             )}
         </div>
     );
-
 };
-
 export default PlaySoloWithAI;
