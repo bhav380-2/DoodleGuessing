@@ -6,5 +6,5 @@
 ![Ml model Prediction](./public/img/sc3.png)
 
 ## Trolling Bot
-![Trolling Bot](./public/img/sc5.png)
+![Trolling Bot](./public/img/sc4.png)
 
