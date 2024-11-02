@@ -5,23 +5,28 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
     return (
         <div className="home-container">
-            <header className="homepage-header">
-                <h1>	<span className="e1">&#9889; </span>Guess &#9997; Doodles     </h1>
-                <div className="icons">
-                    <span className="i1">ᯓᡣ𐭩</span>
-                    <span className="i2">ᝰ.ᐟ</span>
-                    <span className="i3">꩜</span>
-                </div>
-            </header>
 
-            <nav className="buttons-container">
-                <Link className="play-solo-btn" to="/play">
-                    <button>Play Solo</button>
-                </Link>
-                <Link className="play-solo-btn" to="/x">
-                    <button>Multiplayer</button>
-                </Link>
-            </nav>
+            <div className="b1">
+                <header className="homepage-header">
+                    <h1>Guess Doodles     </h1>
+                    <div className="icons-1">
+                        <span className="ic1">ᯓᡣ𐭩</span>
+                        <span className="ic2">ᝰ.ᐟ</span>
+                        <span className="ic3">꩜</span>
+                    </div>
+                </header>
+
+                <nav className="buttons-container">
+                    <Link className="play-solo-btn" to="/play">
+                        <button>Play Solo</button>
+                    </Link>
+                    <Link className="play-solo-btn" to="/x">
+                        <button>Multiplayer</button>
+                    </Link>
+                </nav>
+
+            </div>
+
             <div className="box">
             </div>
         </div>

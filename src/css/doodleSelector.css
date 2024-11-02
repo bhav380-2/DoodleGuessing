@@ -1,18 +1,30 @@
 .doodle-selector-container{
   border:1px solid black;
-  height:300px;
-  width:70%;
-  margin:auto;
+  height:100%;
+  width:100%;
+  background: radial-gradient(263px at 100.2% 3%, rgb(12, 85, 141) 31.1%, rgb(205, 181, 93) 36.4%, rgb(244, 102, 90) 50.9%, rgb(199, 206, 187) 60.7%, rgb(249, 140, 69) 72.5%, rgba(16, 29, 41, 0.919) 72.6%);
+
+
+
 }
 
+.doodle-selector-container h3{
+  color:white;
+  position: relative;
+  top:2.2rem;
+  left:5.5rem;
+  letter-spacing: 3px;
+  font-size: 1.1rem;
 
+}
 
 .msg{
-    font-size:2.2rem;
-    letter-spacing: 2px;
-    color:black;
+   font-size:3rem;
+    letter-spacing: 5px;
+    color:white;
     font-family: cursive;
-
+    text-align: center;
+    font-weight: 500;
 }
 
 .icons span{
@@ -59,27 +71,20 @@
 }
 
 
-
-
-.doodle-selector{
-    background-color: none;
-}
-
-
 /* Doodle Selector Styles */
 .doodle-selector {
     display: flex;
     justify-content: space-around;
     margin:auto;
-    margin-top:5.5%;
+    margin-top:5%;
     width:65%;
   }
   
   .doodle-option {
     text-transform: capitalize;
-    width: 95px;
-    height: 95px;
-    border: 2px solid #3498db;
+    width: 130px;
+    height: 105px;
+    border: 2px solid white;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -90,12 +95,16 @@
     overflow: hidden;
     padding:25px;
     text-align: center;
-
-    background-color: black;
     color:white;
-    font-size:1.25rem;
+    font-size:1.2rem;
+    letter-spacing: 1.3px;
     font-weight: bold;
+    background: radial-gradient(circle at -8.9% 51.2%, rgb(255, 124, 0) 0%, rgb(255, 124, 0) 15.9%, rgb(255, 163, 77) 15.9%, rgb(255, 163, 77) 24.4%, rgb(19, 30, 37) 24.5%, rgb(19, 30, 37) 66%);
+    /* background: radial-gradient(circle at 10% 20%, rgb(98, 114, 128) 0%, rgb(52, 63, 51) 90.1%); */
   }
+
+
+
   
   .doodle-option:hover {
     transform: translateY(-5px);

@@ -23,7 +23,7 @@ const Timer = ({ nextRound, timeLeft, speak, voice1, voice2, voice3, score, isSp
                 setTimeout(() => {
                     setShowBubble(false);  // Hide the bubble when speaking ends
                     nextRound();
-                }, 24000)
+                }, 1600)
                 resolve();
             };
             window.speechSynthesis.speak(utterance);
@@ -32,13 +32,13 @@ const Timer = ({ nextRound, timeLeft, speak, voice1, voice2, voice3, score, isSp
     };
 
     const trollUser = async () => {
-            const comment = trollComments.random[Math.floor(Math.random() * trollComments.random.length)];
-            await trollSpeak(comment);
+        const comment = trollComments.random[Math.floor(Math.random() * trollComments.random.length)];
+        await trollSpeak(comment);
     }
 
     useEffect(() => {
-        if (timeLeft ==0) {
-            if (Math.floor(Math.random() * 3) >= 0) {
+        if (timeLeft == 0) {
+            if (Math.floor(Math.random() * 3) == 1) {
                 trollUser();
             } else {
                 speak("Times up!!!", voice2).then(() => {
@@ -54,19 +54,23 @@ const Timer = ({ nextRound, timeLeft, speak, voice1, voice2, voice3, score, isSp
 
     return (
         <>
-            <h3>Time Left: {timeLeft}s</h3>
-            {showBubble && (
-                <div className="overlay">
-                    <div>
-                        <div className="circular-sb">
-                            {bubbleText}
-                            <div className="circle1"></div>
-                            <div className="circle2"></div>
-                        </div>
-                        <div className="botimg" ><img src={img} /></div>
-                    </div>
+            <div className='timerContainer'>
+                <div className="time">
+                    <h4>Time: {timeLeft}s</h4>
                 </div>
-            )}
+                {showBubble && (
+                    <div className="overlay">
+                        <div>
+                            <div className="circular-sb">
+                                {bubbleText}
+                                <div className="circle1"></div>
+                                <div className="circle2"></div>
+                            </div>
+                            <div className="botimg" ><img src={img} /></div>
+                        </div>
+                    </div>
+                )}
+            </div>
         </>
     );
 };

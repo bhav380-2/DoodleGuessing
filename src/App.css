@@ -1,52 +1,39 @@
 /* App.css */
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #f7f9fc, #e1ecf4);
+  /* background: linear-gradient(135deg, #f7f9fc, #e1ecf4); */
   margin: 0;
   padding: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .container {
-  max-width: 90vw;
+  height: 45vh;
+
+
+
+  /* max-width: 90vw;
   margin: 25px auto; 
   margin-top:0;
   padding: 10px;
   border-radius: 12px;
   animation: fadeIn 0.5s ease-in-out;
-  min-height: 250px;
-  border:2px solid black;
+  min-height: 250px; */
+  /* border:2px solid black; */
 }
 
 /* Title Styles */
-h1 {
-  text-align: center;
-  font-size: 36px;
-  color: #2c3e50;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
 
-h2 {
+/* h2 {
   color: #2980b9;
   text-align: center;
   margin-bottom: 20px;
-}
+} */
 
 .new{
 }
  
-.container .box1 button{
-  background-color: black;
-  color:white;
-  width: 6.5rem;
-  height:2.3rem;
-  /* padding:5px; */
-  border-radius: 5px;
-  /* font-weight: 500; */
-  font-size: 0.9rem;
-  cursor: pointer;
-  margin-top: 10px;
-} 
 
 /* Timer Styles */
 .timer {

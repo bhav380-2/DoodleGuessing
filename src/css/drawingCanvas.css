@@ -1,42 +1,97 @@
-.button-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    margin-right:20px;
-    margin-top : 5px;
+body {}
+
+.drawing {
+  display: flex;
+  justify-content: flex-start;
 }
 
-.button-container button{
-    font-size:1rem;
+.canvas-box {
+  /* border:2px solid black; */
+  /* margin-top: 10px;; */
+  position: relative;
+  /* top:3px; */
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  /* border: 3px solid green;; */
+  box-shadow: 1px 1px 2px 2px lightgray;
 }
 
-.canvas-box{
-    display:flex;
-    justify-content: center;
+
+.button-container {
+  margin: auto;
+  /* border: 2px solid red;; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  /* margin-right:20px; */
+  margin-top: 5rem;
 }
 
-.result{
-    height:auto;
-    width:75vh;
-    min-height: 100px;
-    border:1px solid black;
-    padding:20px;
-    font-size: 2rem;
-    font-weight: 500;
-    font-family:cursive;
-    background-color: rgb(43 125 131 / 90%);
-    color :white;
-  }
-  
-  .result span:nth-child(2){
-    font-size:2.1 rem;
-    font-weight: 600;
-  }
-  
-  .result span:nth-child(4){
-    padding:2px;
-    font-size:2.4rem;
-    font-weight:600;
-    font-family:sans-serif;
-  }
+.button-container button {
+
+  height: 50px;
+  width: 135px;
+  /* border-radius:1rem; */
+  margin-top: 2rem;
+  color: black;
+  background-color: rgb(255, 255, 255);
+  transition: 0.3s ease-in-out;
+  position: relative;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  outline: none;
+
+
+  /* left:-3.5rem; */
+}
+
+.button-container button:hover {
+  color: white;
+  background-color:gray ;
+}
+
+.button-container button:active {
+  border: 5px solid black;
+}
+
+.button-container button span {
+  text-transform: capitalize;
+  margin-left: 10px;
+}
+
+.result {
+  height: auto;
+  width: 75vh;
+  min-height: 100px;
+  /* border:1px solid black; */
+  position: relative;
+  top: -2.5rem;
+  left: 3rem;
+  padding: 20px;
+  font-size: 2rem;
+  font-weight: 500;
+  font-family: cursive;
+  /* background-color: rgb(43 125 131 / 90%); */
+  color: white;
+}
+
+.result span:nth-child(2) {
+  font-size: 2.1 rem;
+  font-weight: 600;
+}
+
+.result span:nth-child(4) {
+  padding: 2px;
+  font-size: 2.4rem;
+  font-weight: 600;
+  font-family: sans-serif;
+}

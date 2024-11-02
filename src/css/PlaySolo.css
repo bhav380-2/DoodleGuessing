@@ -1,5 +1,17 @@
+.box1 {
+  background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%);
+  border: 1px solid black;
+  /* background: rgb(16, 29, 41, 0.919) */
 
-  .box1 h2{
-    border:1px solid green;
-  }
-  
+}
+
+
+
+.box1 h2 {
+  font-size: 3rem;
+  letter-spacing: 5px;
+  font-family: cursive;
+  text-align: center;
+  font-weight: 500;
+  color: white;
+}

@@ -11,33 +11,29 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
     const [result, setResult] = useState('');
     const [prediction, setPrediction] = useState([]);
     const myCanvas = useRef();
-    const [flag, setFlag] = useState(0);
-    const [canTroll, setCanTroll] = useState(true);
 
     // Use a ref to track already seen predictions
     const seenPredictions = useRef(new Set());
     useEffect(() => {
         console.log(window.speechSynthesis.getVoices());
-        if (timer % 4 === 0 && timer !== 40 && timer>0) {
+        if (timer % 4 === 0 && timer !== 40 && timer > 0 && !isCanvasEmpty()) {
             console.log("Predicting at time remaining: ", timer);
             getAnswer();
         }
     }, [timer]); // Effect depends on timer
 
     const handlePredictions = async () => {
-
         for (let pred of prediction) {
-                pred = pred.replace('_', ' ');
-                if (!seenPredictions.current.has(pred)) {
-                    setPrevResult(prev => `${prev} a ${pred}, `);
-                    seenPredictions.current.add(pred);
-                    setResult(pred);
-                    await speak("a " + pred, voice1);
-                    if (pred == doodle) {
-                        break;
-                    }
+            pred = pred.replace('_', ' ');
+            if (!seenPredictions.current.has(pred)) {
+                setPrevResult(prev => `${prev} a ${pred}, `);
+                seenPredictions.current.add(pred);
+                setResult(pred);
+                await speak("a " + pred, voice1);
+                if (pred == doodle) {
+                    break;
                 }
-           
+            }
         }
     };
 
@@ -109,21 +105,27 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
         }
     };
 
+    const isCanvasEmpty = () => {
+        const saveData = myCanvas.current.getSaveData();
+        return saveData.slice(1, 11) == `"lines":[]`;
+
+    };
+
     const clearCanvas = () => {
         myCanvas.current.clear();
-        setPrevResult(""); // Clear previous results
-        seenPredictions.current.clear(); // Reset seen predictions
     };
 
     const canvasStyle = {
-        borderColor: 'aliceblue',
-        borderStyle: 'inset',
+        // borderColor: 'aliceblue',
+        // borderStyle: 'inset',
         width: '70vh',
         height: "65vh",
-        backgroundColor: 'whiteSmoke',
-        border: '1px solid black',
-        boxShadow: '0.5px 0.5px 0.5px 0.5px',
+        backgroundColor: 'white',
+        borderLeft:'2px solid lightgrey',
+        // border: '1px solid black',
+        // boxShadow: '0.5px 0.5px 0.5px 0.5px',
     };
+
 
     const stopPlay = () => {
         setShowScoreCard(true);
@@ -134,16 +136,15 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
     }
 
     return (
-        <div>
+        <div className='drawing'>
             <div className="canvas-box">
+
                 <div className='button-container'>
                     <button className="btn btn-outline-primary btn-md eraser" onClick={clearCanvas}>
-                        <i class="fa-solid fa-trash"></i> clear
+                        <i class="fa-solid fa-trash"></i> <span> clear</span>
                     </button>
-                    <button className="btn btn-outline-primary btn-md eraser" onClick={clearCanvas}>
-                        <i class="fa-solid fa-eraser"></i> Erase
-                    </button>
-                    <button onClick={() => stopPlay()}><i class="fa-solid fa-stop"></i> Stop Play </button>
+
+                    <button onClick={() => stopPlay()}><i class="fa-solid fa-stop"></i> <span> Stop</span> </button>
                 </div>
 
                 <CanvasDraw
@@ -156,13 +157,13 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
                     ref={myCanvas}
                 />
 
-                <div className="result">
-                    <h3>AI : Let me guess... </h3>
-                    <span>This is&nbsp;</span>
-                    <span>{prevResult.lastIndexOf(" a ") != -1 ? prevResult.substring(0, prevResult.lastIndexOf(" a ")).trim() : ""}</span>
-                    <span>{" a " + result}</span>
-                    {/* {doodle==result?()=>{alert("Hurrah! guessed correctly..."+result);nextRound()}:""} */}
-                </div>
+
+            </div>
+            <div className="result">
+                <h3>AI : Let me guess... </h3>
+                <span>This is&nbsp;</span>
+                <span>{prevResult.lastIndexOf(" a ") != -1 ? prevResult.substring(0, prevResult.lastIndexOf(" a ")).trim() : ""}</span>
+                <span>{" a " + result}</span>
             </div>
         </div>
     );

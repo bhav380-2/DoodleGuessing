@@ -11,6 +11,16 @@
     z-index: 1000;
 }
 
+.time{
+    color:white;
+    position: relative;
+    left:5%;
+    top:-1%;
+    font-size:1.1rem;
+    letter-spacing: 2px;;
+
+}
+
 .speech-bubble {
     position: relative;
     background: #fff;

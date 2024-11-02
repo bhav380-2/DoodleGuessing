@@ -1,45 +1,65 @@
 
 
 .home-container{
-	background-color: white;
-	height:100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	height:100vh;
+	
 	margin:0;
-
+}
+.home-container .b1{
+	background: radial-gradient(263px at 100.2% 3%, rgb(12, 85, 141) 31.1%, rgb(205, 181, 93) 36.4%, rgb(244, 102, 90) 50.9%, rgb(199, 206, 187) 60.7%, rgb(249, 140, 69) 72.5%, rgba(16, 29, 41, 0.919) 72.6%);
+	height: 45vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .home-container .box{
 	background-image: url('../img/7600.jpg');
-	background-blend-mode:luminosity;
 	background-size: cover;
-	height:45%;
+	background-repeat: no-repeat;
+	/* background-position: bottom; */
+	/* transform: scale(0.98); */
+	/* border: 1px solid red;; */
 	margin:0;
+	height: 50vh;
+	/* position: absolute; */
+	width: 100%;;
 }
 
 
 .homepage-header h1{
-	font-size:4.5rem;
+	color:white;
+	letter-spacing: 3.5px;
+	text-align: center;
+	font-size:3.7rem;
 	font-family: cursive;
+	font-weight: 500;
 }
 
 .e1{
-	font-size:2.6rem;
+	font-size:2rem;
 }
 
-.icons span{
+.e2{
+	font-size:2.5rem;
+}
+
+.icons-1 span{
 	position: absolute;
+	color:white;
 }
 
-.i1{
+.ic1{
 	right:20%;
 	transform: rotate(23deg);
 	font-size:4.1rem;
 	top:3.3%;
 
 }
-.i2{
+.ic2{
 	left:5%;
 	top:27.5%;
 	transform: rotate(25deg);
@@ -49,7 +69,7 @@
 
 }
 
-.i3{
+.ic3{
 	left:11%;
 	top:9.5%;
 	transform: rotate(23deg);
@@ -70,6 +90,7 @@
 }
 
 .play-solo-btn button{
+	color:white;
 	cursor: pointer;
 	margin:auto;
 	border-radius: 2.5rem;
@@ -81,8 +102,9 @@
 
 	transform: rotate(345deg);
 	font-size:1.6rem;
-	font-weight: 600;
-	border:5px solid black;
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: 500;
+	border:1px solid white;
 	transition: 0.35s ease-out;
 
 }
