@@ -118,10 +118,27 @@
 }
 
 
+
+
+
 .play-solo-btn button:hover{
 	transform: rotate(360deg);
 
 }
+
+
+.buttons-container .play-solo-btn:nth-child(2) button:hover span{
+	font-size:0px;
+}
+
+
+
+.buttons-container .play-solo-btn:nth-child(2) button:hover:before {
+	content:"coming_soon!";
+	padding:1.5rem;
+  }
+
+
 
 
 

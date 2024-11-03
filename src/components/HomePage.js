@@ -20,8 +20,8 @@ const HomePage = () => {
                     <Link className="play-solo-btn" to="/play">
                         <button>Play Solo</button>
                     </Link>
-                    <Link className="play-solo-btn" to="/x">
-                        <button>Multiplayer</button>
+                    <Link className="play-solo-btn" to="#">
+                        <button><span>Multiplayer</span></button>
                     </Link>
                 </nav>
 

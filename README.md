@@ -1,10 +1,21 @@
-# Doodle Gussing Game
-![Desktop Calculator Screenshot](./public/img/sc.png)
+# Sketch n’ Guess
 
 
-## Accuracy above 85%
-![Ml model Prediction](./public/img/sc3.png)
+## HOME
+![Desktop Calculator Screenshot](./public/img/home.png)
 
-## Trolling Bot
-![Trolling Bot](./public/img/sc4.png)
+
+## Select Doodle
+![Desktop Calculator Screenshot](./public/img/doodleSelector.png)
+
+## Sketch n` AI will Guess
+![Ml model Prediction](./public/img/AIGuess.png)
+
+
+## Hahahaaa
+![Trolling Bot](./public/img/troll.png)
+
+
+## Well Played
+![Trolling Bot](./public/img/score.png)
 
