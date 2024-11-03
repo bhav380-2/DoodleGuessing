@@ -39,6 +39,9 @@ const DoodleSelector = ({ round, totalRounds, onSelect }) => {
                         <span className='i4'>〰</span>
                         <span className='i5'>𝔁𝓸𝔁𝓸</span>
                         <span className='i6'>•ᴗ•</span>
+                        <span className="i7">꩜</span>
+                        <span className="i8">༼ つ ◕_◕ ༽つ &lt;3</span>
+                        <span className="i9">١٥٧٤♡</span>
                     </div>
 
 

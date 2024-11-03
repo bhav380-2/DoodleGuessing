@@ -37,14 +37,14 @@
   left:8%;
 }
 .duck{
-  font-size:6.5rem;
+  font-size:5.5rem;
   top:50%;
   right:25%;
   transform: rotate(18deg);
 }
 
 .i3{
-  font-size:5rem;
+  font-size:4.1rem;
   top:65%;
   left:23%;
   transform: rotate(133deg);
@@ -57,19 +57,43 @@
   transform: rotate(155deg);
 }
 .i5{
-  font-size:4.7rem;
+  font-size:4.3rem;
   top:67%;
   right:40%;
   transform: rotate(45deg);
 }
 
 .i6{
-  font-size:4.5rem;
-  top:66%;
+  font-size:4rem;
+  top:67.5%;
   left:12%;
   transform: rotate(14deg);
 }
 
+.i7{
+  font-size:4rem;
+  top:50%;
+  left:7%;
+  transform: rotate(17deg);
+
+}
+
+.i8{
+
+  font-size:1.8rem;
+  top:70%;
+  left:81%;
+  transform: rotate(70deg);
+
+
+}
+
+.i9{
+  font-size:2.3rem;
+  top:83%;
+  left:40%;
+  transform: rotate(19deg);
+}
 
 /* Doodle Selector Styles */
 .doodle-selector {
