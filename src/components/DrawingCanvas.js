@@ -5,7 +5,7 @@ import CanvasDraw from 'react-canvas-draw';
 import axios from 'axios';
 import jimp from 'jimp';
 import '../css/drawingCanvas.css';
-import { Draw } from '@tensorflow/tfjs';
+import * as tf from '@tensorflow/tfjs';
 
 const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setShowScoreCard, setScore, setTotalRounds, round }) => {
     const [prevResult, setPrevResult] = useState("");
@@ -17,7 +17,7 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
     const seenPredictions = useRef(new Set());
     useEffect(() => {
         // console.log(window.speechSynthesis.getVoices());
-        if (timer % 4 === 0 && timer !== 40 && timer > 0 && !isCanvasEmpty()) {
+        if (timer % 4 === 0 &&  timer !== 40 && timer > 0 && !isCanvasEmpty()) {
             console.log("Predicting at time remaining: ", timer);
             getAnswer();
         }
@@ -30,9 +30,12 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
                 setPrevResult(prev => `${prev} a ${pred}, `);
                 seenPredictions.current.add(pred);
                 setResult(pred);
-                await speak("a " + pred, voice1);
-                if (pred == doodle) {
+                if(pred==doodle){
+                    await speak("oh! its "+pred,voice1);
                     break;
+
+                }else{
+                    await speak("a " + pred, voice1);
                 }
             }
         }
@@ -48,7 +51,7 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
     useEffect(() => {
         if (result === doodle && result !== '') {
             setTimeout(async () => {
-                await speak('Hurrah !!!, guessed correctly.', voice2);
+                // await speak('Hurrah !!!, guessed correctly.', voice2);
                 setScore(prev => prev + 1);
                 alert('press ok to continue')
                 nextRound();
@@ -93,14 +96,39 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
                 return acc;
             }, []);
 
-            const url = 'http://127.0.0.1:5000/predict';
-            const response = await axios.post(url, JSON.stringify(grayData), {
-                headers: { 'Content-Type': 'application/json' }
-            });
+            // const tensor = tf.tensor(grayData).reshape([1, 64, 64, 1]);
 
-            setPrediction(response.data);
+            // const reshapedGrayData = tensor.arraySync();
 
-            console.log("Predictions received: ", response.data);
+            // console.log(reshapedGrayData); 
+
+            const url = 'https://doodlebackend-fast-api.onrender.com/predict'
+            // const url = 'http://127.0.0.1:5000/predict';
+         
+            // const url = 'http://127.0.0.1:8000/predict';
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({data : grayData})
+            };
+            const response = fetch(url, requestOptions).then(response=>response.json())
+                            .then(data=>{
+                                console.log("gotcha")
+                                console.log(data);
+                                setPrediction(data)
+                })
+            // const data = await response.json();
+            // this.setState({ postId: data.id });
+            // const response = await axios.post(url, JSON.stringify(grayData), {
+            //     headers: { 'Content-Type': 'application/json' }
+            // });
+
+            // console.log(response);
+            // console.log(response.data);
+
+            // setPrediction(response.data);
+
+            // console.log("Predictions received: ", response.data);
         } catch (error) {
             console.error("Error in getAnswer:", error);
         }
