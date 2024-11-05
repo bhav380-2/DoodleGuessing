@@ -7,8 +7,8 @@ import axios from 'axios';
 const HomePage = () => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        const url = 'https://doodlebackend-fast-api.onrender.com'
-        // const url = 'http://127.0.0.1:8000';
+        // const url = 'https://doodlebackend-fast-api.onrender.com'
+        const url = 'http://127.0.0.1:8000';
         fetch(url)
             .then((response) => response.json())
             .then(({ success }) => {

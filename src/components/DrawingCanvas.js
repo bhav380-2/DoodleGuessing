@@ -102,10 +102,10 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
 
             // console.log(reshapedGrayData); 
 
-            const url = 'https://doodlebackend-fast-api.onrender.com/predict'
+            // const url = 'https://doodlebackend-fast-api.onrender.com/predict'
             // const url = 'http://127.0.0.1:5000/predict';
          
-            // const url = 'http://127.0.0.1:8000/predict';
+            const url = 'http://127.0.0.1:8000/predict';
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
