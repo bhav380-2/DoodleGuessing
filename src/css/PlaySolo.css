@@ -1,8 +1,13 @@
 .box1 {
   background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%);
-  border: 1px solid black;
+  border: 9px solid red;
   /* background: rgb(16, 29, 41, 0.919) */
 
+}
+
+
+.container {
+  border: 3px solid green;
 }
 
 
@@ -14,4 +19,25 @@
   text-align: center;
   font-weight: 500;
   color: white;
+  border: 2px solid red;
+}
+
+.new {
+  border: 2px solid green;
+}
+
+
+
+@media only screen and (max-width:480px) {
+
+  .box1 h2 {
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    font-family: cursive;
+    text-align: center;
+    font-weight: 500;
+    color: white;
+    border: 2px solid red;
+  }
+
 }

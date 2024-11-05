@@ -1,23 +1,81 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Redirect } from "react-router-dom";
-
 import CanvasDraw from 'react-canvas-draw';
-import axios from 'axios';
+// import axios from 'axios';
 import jimp from 'jimp';
 import '../css/drawingCanvas.css';
-import * as tf from '@tensorflow/tfjs';
+// import * as tf from '@tensorflow/tfjs';
 
 const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setShowScoreCard, setScore, setTotalRounds, round }) => {
+
+    const [canvasStyle, setCanvasStyle] = useState({
+        width: '39rem',
+        height: '35rem',
+        backgroundColor: 'white',
+        borderLeft: '2px solid lightgrey',
+
+    })
+
     const [prevResult, setPrevResult] = useState("");
     const [result, setResult] = useState('');
     const [prediction, setPrediction] = useState([]);
     const myCanvas = useRef();
 
+    useEffect(() => {
+        const updateCanvasStyle = () => {
+            // if (window.innerWidth < 480) {
+            //     setCanvasStyle({ width: "300px", height: "300px" });
+            // } else if (window.innerWidth < 720) {
+            //     setCanvasStyle({ width: "400px", height: "400px" });
+            // } else 
+
+
+            if (window.innerWidth <= 720) {
+
+                setCanvasStyle({
+                    width: '100%',
+                    height: '21rem',
+                    backgroundColor: 'white',
+                    borderLeft: '2px solid lightgrey',
+                });
+
+            } else if (window.innerWidth <= 720) {
+
+                setCanvasStyle({
+                    width: '100%',
+                    height: '25rem',
+                    backgroundColor: 'white',
+                    borderLeft: '2px solid lightgrey',
+                });
+
+
+            } else if (window.innerWidth < 993) {
+                setCanvasStyle({
+                    width: '82%',
+                    height: '29rem',
+                    backgroundColor: 'white',
+                    borderLeft: '2px solid lightgrey',
+                });
+            } else {
+                setCanvasStyle({
+                    width: '39rem',
+                    height: '35rem',
+                    backgroundColor: 'white',
+                    borderLeft: '2px solid lightgrey',
+                });
+
+            }
+        };
+
+        updateCanvasStyle();
+        window.addEventListener("resize", updateCanvasStyle);
+        return () => window.removeEventListener("resize", updateCanvasStyle);
+    }, []);
+
     // Use a ref to track already seen predictions
     const seenPredictions = useRef(new Set());
     useEffect(() => {
         // console.log(window.speechSynthesis.getVoices());
-        if (timer % 4 === 0 &&  timer !== 40 && timer > 0 && !isCanvasEmpty()) {
+        if (timer % 4 === 0 && timer !== 40 && timer > 0 && !isCanvasEmpty()) {
             console.log("Predicting at time remaining: ", timer);
             getAnswer();
         }
@@ -30,11 +88,11 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
                 setPrevResult(prev => `${prev} a ${pred}, `);
                 seenPredictions.current.add(pred);
                 setResult(pred);
-                if(pred==doodle){
-                    await speak("oh! its "+pred,voice1);
+                if (pred == doodle) {
+                    await speak("oh! its " + pred, voice1);
                     break;
 
-                }else{
+                } else {
                     await speak("a " + pred, voice1);
                 }
             }
@@ -97,38 +155,32 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
             }, []);
 
             // const tensor = tf.tensor(grayData).reshape([1, 64, 64, 1]);
-
             // const reshapedGrayData = tensor.arraySync();
-
             // console.log(reshapedGrayData); 
-
-            // const url = 'https://doodlebackend-fast-api.onrender.com/predict'
             // const url = 'http://127.0.0.1:5000/predict';
-         
-            const url = 'http://127.0.0.1:8000/predict';
+
+            const url = 'https://doodlebackend-fast-api.onrender.com/predict'
+            // const url = 'http://127.0.0.1:8000/predict';
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({data : grayData})
+                body: JSON.stringify({ data: grayData })
             };
-            const response = fetch(url, requestOptions).then(response=>response.json())
-                            .then(data=>{
-                                console.log("gotcha")
-                                console.log(data);
-                                setPrediction(data)
+            const response = fetch(url, requestOptions).then(response => response.json())
+                .then(data => {
+                    console.log("gotcha")
+                    console.log(data);
+                    setPrediction(data)
                 })
             // const data = await response.json();
             // this.setState({ postId: data.id });
             // const response = await axios.post(url, JSON.stringify(grayData), {
             //     headers: { 'Content-Type': 'application/json' }
             // });
-
             // console.log(response);
             // console.log(response.data);
-
             // setPrediction(response.data);
 
-            // console.log("Predictions received: ", response.data);
         } catch (error) {
             console.error("Error in getAnswer:", error);
         }
@@ -144,18 +196,6 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
         myCanvas.current.clear();
     };
 
-    const canvasStyle = {
-        // borderColor: 'aliceblue',
-        // borderStyle: 'inset',
-        width: '65vh',
-        height: "65vh",
-        backgroundColor: 'white',
-        borderLeft:'2px solid lightgrey',
-        // border: '1px solid black',
-        // boxShadow: '0.5px 0.5px 0.5px 0.5px',
-    };
-
-
     const stopPlay = () => {
         setShowScoreCard(true);
         setTotalRounds((prev) => round);
@@ -167,7 +207,6 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
     return (
         <div className='drawing'>
             <div className="canvas-box">
-
                 <div className='button-container'>
                     <button className="btn btn-outline-primary btn-md eraser" onClick={clearCanvas}>
                         <i class="fa-solid fa-trash"></i> <span> clear</span>
@@ -185,8 +224,6 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
                     style={canvasStyle}
                     ref={myCanvas}
                 />
-
-
             </div>
             <div className="result">
                 <h3>AI : Let me guess... </h3>
