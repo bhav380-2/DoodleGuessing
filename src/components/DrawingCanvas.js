@@ -75,7 +75,7 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
     const seenPredictions = useRef(new Set());
     useEffect(() => {
         // console.log(window.speechSynthesis.getVoices());
-        if (timer % 4 === 0 && timer !== 40 && timer > 0 && !isCanvasEmpty()) {
+        if (timer % 4 === 0 && timer !== 32 && timer > 0 && !isCanvasEmpty()) {
             console.log("Predicting at time remaining: ", timer);
             getAnswer();
         }
@@ -90,6 +90,7 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
                 setResult(pred);
                 if (pred == doodle) {
                     await speak("oh! its " + pred, voice1);
+                    window.speechSynthesis.cancel();
                     break;
 
                 } else {
@@ -168,8 +169,8 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
             };
             const response = fetch(url, requestOptions).then(response => response.json())
                 .then(data => {
-                    console.log("gotcha")
-                    console.log(data);
+                    // console.log("gotcha")
+                    // console.log(data);
                     setPrediction(data)
                 })
             // const data = await response.json();

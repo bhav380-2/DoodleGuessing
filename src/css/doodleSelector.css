@@ -491,7 +491,11 @@
   }
 
   .i8 {
-    display: none;
+    font-size: 0.69rem;
+    top: 83%;
+    left:34.5%;
+    transform: rotate(45deg);
+
   }
 
   .i9 {

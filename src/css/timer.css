@@ -7,9 +7,15 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
-    justify-content: flex;
+    justify-content: center;
     z-index: 1000;
 }
+
+/* .overlay>div{
+
+    width:100%;
+
+} */
 
 .time {
     color: white;
@@ -18,7 +24,7 @@
     top: -1%;
     font-size: 1.1rem;
     letter-spacing: 2px;
-    ;
+    width:10rem;
 
 }
 

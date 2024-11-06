@@ -5,13 +5,31 @@ export const useDoodleGame = () => {
     const [selectedDoodle, setSelectedDoodle] = useState(null);
     const [showScoreCard, setShowScoreCard] = useState(false);
     const [score,setScore] = useState(0);
-    const [totalRounds,setTotalRounds] = useState(5);
+    const [totalRounds,setTotalRounds] = useState(4);
     const [round,setRound] = useState(1);
-    const [timeLeft, setTimeLeft] = useState(40);
+    const [timeLeft, setTimeLeft] = useState(32);
     const [isPlaying, setIsPlaying] = useState(false);
-    let voice1 = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google US English');
-    let voice2 = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google UK English Male');
-    let voice3 = window.speechSynthesis.getVoices().find(voice => voice.name.includes('Google') && voice.lang === 'hi-IN');
+
+    const loadVoices = () => {
+        return new Promise((resolve) => {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                resolve(voices);
+            } else {
+                window.speechSynthesis.onvoiceschanged = () => {
+                    resolve(window.speechSynthesis.getVoices());
+                };
+            }
+        });
+    };
+    
+    let voice1,voice2,voice3;
+    loadVoices().then((voices) => {
+        voice1 = voices.find(voice => voice.name === 'Google US English') || voices[0]; // Fallback if not found
+        voice2 = voices.find(voice => voice.name === 'Google UK English Male') || voices[0];
+        voice3 = voices.find(voice => voice.name.includes('Google') && voice.lang === 'hi-IN') || voices[0];
+    })
+
     const isSpeaking = useRef(false);  
     useEffect(() => {
         let timer;

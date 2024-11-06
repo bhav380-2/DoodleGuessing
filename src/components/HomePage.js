@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/homePage.css'
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import LoadingPage from './LoadingPage';
 
 const HomePage = () => {
     const [loading, setLoading] = useState(true);
@@ -14,12 +14,12 @@ const HomePage = () => {
             .then(({ success }) => {
 
                 if(success){
-                    setLoading(false);
+                    setLoading(false)
                 }else{
                     setTimeout(()=>{
                         setLoading(false)
     
-                    },25000)
+                    },58000)
                 }
             })
     })
@@ -27,7 +27,8 @@ const HomePage = () => {
     return (
         <>
             {loading ? (
-                <div>Loading...</div>
+                <LoadingPage/>
+               
             ) : (
                 <div className="home-container">
                     <div className="b1">

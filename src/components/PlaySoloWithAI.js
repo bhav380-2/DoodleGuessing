@@ -41,7 +41,7 @@ const PlaySoloWithAI = () => {
         }else 
             setRound((prev)=>prev+1);
         setSelectedDoodle(null);
-        setTimeLeft(40);
+        setTimeLeft(32);
         setIsPlaying(false);
     }
 
@@ -50,9 +50,6 @@ const PlaySoloWithAI = () => {
             {showScoreCard ? (
                 <ScoreCard
                     isSpeaking ={isSpeaking}
-                    voice1 = {voice1}
-                    voice2 = {voice2}
-                    voice3 = {voice3}
                     score={score}
                     totalRounds = {totalRounds}
                     setScore = {setScore}
