@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/DoodleGuessing/static/css/main.a4743cbb.chunk.css",
-    "main.js": "/DoodleGuessing/static/js/main.23818d6d.chunk.js",
-    "main.js.map": "/DoodleGuessing/static/js/main.23818d6d.chunk.js.map",
+    "main.css": "/DoodleGuessing/static/css/main.079a33ef.chunk.css",
+    "main.js": "/DoodleGuessing/static/js/main.6de6f98e.chunk.js",
+    "main.js.map": "/DoodleGuessing/static/js/main.6de6f98e.chunk.js.map",
     "runtime-main.js": "/DoodleGuessing/static/js/runtime-main.f1d18561.js",
     "runtime-main.js.map": "/DoodleGuessing/static/js/runtime-main.f1d18561.js.map",
     "static/js/2.0d612e97.chunk.js": "/DoodleGuessing/static/js/2.0d612e97.chunk.js",
     "static/js/2.0d612e97.chunk.js.map": "/DoodleGuessing/static/js/2.0d612e97.chunk.js.map",
     "index.html": "/DoodleGuessing/index.html",
-    "precache-manifest.da7845aa5cf4be87de260c7ac6100004.js": "/DoodleGuessing/precache-manifest.da7845aa5cf4be87de260c7ac6100004.js",
+    "precache-manifest.196deebd6a5cfebe487a7190a4cdff62.js": "/DoodleGuessing/precache-manifest.196deebd6a5cfebe487a7190a4cdff62.js",
     "service-worker.js": "/DoodleGuessing/service-worker.js",
-    "static/css/main.a4743cbb.chunk.css.map": "/DoodleGuessing/static/css/main.a4743cbb.chunk.css.map",
+    "static/css/main.079a33ef.chunk.css.map": "/DoodleGuessing/static/css/main.079a33ef.chunk.css.map",
     "static/js/2.0d612e97.chunk.js.LICENSE.txt": "/DoodleGuessing/static/js/2.0d612e97.chunk.js.LICENSE.txt",
     "static/media/homePage.css": "/DoodleGuessing/static/media/7600.b2dcbbe6.jpg",
     "static/media/a2.jpg": "/DoodleGuessing/static/media/a2.e14efc88.jpg",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.f1d18561.js",
     "static/js/2.0d612e97.chunk.js",
-    "static/css/main.a4743cbb.chunk.css",
-    "static/js/main.23818d6d.chunk.js"
+    "static/css/main.079a33ef.chunk.css",
+    "static/js/main.6de6f98e.chunk.js"
   ]
 }

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/DoodleGuessing/precache-manifest.da7845aa5cf4be87de260c7ac6100004.js"
+  "/DoodleGuessing/precache-manifest.196deebd6a5cfebe487a7190a4cdff62.js"
 );
 
 self.addEventListener('message', (event) => {
