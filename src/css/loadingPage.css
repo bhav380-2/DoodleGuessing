@@ -31,3 +31,16 @@
         transform: rotate(360deg);
     }
 }
+
+@media only screen and (max-width:720px){
+    .loading-msg{
+        font-size:1.1rem;
+    }
+    
+}
+
+@media only screen and (max-width:480px){
+    .loading-msg{
+        font-size:0.85rem;
+    }
+}
