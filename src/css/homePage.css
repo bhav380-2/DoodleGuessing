@@ -275,4 +275,11 @@
 		display: none;
 	}
 
+
+	.buttons-container .play-solo-btn:nth-child(2) button:hover:before {
+		content: "coming_soon!";
+		padding: 0rem;
+	}
+
+
 }

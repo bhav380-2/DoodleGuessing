@@ -38,7 +38,7 @@ const Timer = ({ nextRound, timeLeft, speak, voice1, voice2, voice3, score, isSp
 
     useEffect(() => {
         if (timeLeft == 0) {
-            if (Math.floor(Math.random() * 3) ==1) {
+            if (Math.floor(Math.random() * 3) >=1) {
                 trollUser();
             } else {
                 speak("Times up!!!", voice2).then(() => {

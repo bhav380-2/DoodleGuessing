@@ -22,6 +22,12 @@
     font-size:1.5rem;
 }
 
+.note{
+    margin-top:10px;
+    font-size:0.58rem;
+    color:gray;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);

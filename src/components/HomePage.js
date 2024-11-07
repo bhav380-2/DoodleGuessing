@@ -19,7 +19,7 @@ const HomePage = () => {
                     setTimeout(()=>{
                         setLoading(false)
     
-                    },58000)
+                    },51000)
                 }
             })
     })

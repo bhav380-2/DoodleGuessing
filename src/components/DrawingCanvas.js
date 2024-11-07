@@ -89,7 +89,7 @@ const DrawingCanvas = ({ speak, voice1, voice2, nextRound, doodle, timer, setSho
                 seenPredictions.current.add(pred);
                 setResult(pred);
                 if (pred == doodle) {
-                    await speak("oh! its " + pred, voice1);
+                    await speak("I know its " + pred, voice1);
                     window.speechSynthesis.cancel();
                     break;
 
