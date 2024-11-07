@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/DoodleGuessing/static/css/main.efcb3d81.chunk.css",
+    "main.css": "/DoodleGuessing/static/css/main.ea472079.chunk.css",
     "main.js": "/DoodleGuessing/static/js/main.0846adf1.chunk.js",
     "main.js.map": "/DoodleGuessing/static/js/main.0846adf1.chunk.js.map",
     "runtime-main.js": "/DoodleGuessing/static/js/runtime-main.f1d18561.js",
@@ -8,9 +8,9 @@
     "static/js/2.50231e12.chunk.js": "/DoodleGuessing/static/js/2.50231e12.chunk.js",
     "static/js/2.50231e12.chunk.js.map": "/DoodleGuessing/static/js/2.50231e12.chunk.js.map",
     "index.html": "/DoodleGuessing/index.html",
-    "precache-manifest.87025ef5434e13c065d2d003a3fcc410.js": "/DoodleGuessing/precache-manifest.87025ef5434e13c065d2d003a3fcc410.js",
+    "precache-manifest.5d1ab269ceb181ae5e4b77331a81e041.js": "/DoodleGuessing/precache-manifest.5d1ab269ceb181ae5e4b77331a81e041.js",
     "service-worker.js": "/DoodleGuessing/service-worker.js",
-    "static/css/main.efcb3d81.chunk.css.map": "/DoodleGuessing/static/css/main.efcb3d81.chunk.css.map",
+    "static/css/main.ea472079.chunk.css.map": "/DoodleGuessing/static/css/main.ea472079.chunk.css.map",
     "static/js/2.50231e12.chunk.js.LICENSE.txt": "/DoodleGuessing/static/js/2.50231e12.chunk.js.LICENSE.txt",
     "static/media/homePage.css": "/DoodleGuessing/static/media/7600.b2dcbbe6.jpg",
     "static/media/a2.jpg": "/DoodleGuessing/static/media/a2.e14efc88.jpg",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.f1d18561.js",
     "static/js/2.50231e12.chunk.js",
-    "static/css/main.efcb3d81.chunk.css",
+    "static/css/main.ea472079.chunk.css",
     "static/js/main.0846adf1.chunk.js"
   ]
 }

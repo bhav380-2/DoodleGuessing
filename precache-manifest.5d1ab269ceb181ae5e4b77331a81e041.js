@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "448874fdc9d38140fd05715be384ea32",
+    "revision": "88ff1f5ebc38e85b729924b61e39fa9a",
     "url": "/DoodleGuessing/index.html"
   },
   {
-    "revision": "2e8ea13fffe25c75d661",
-    "url": "/DoodleGuessing/static/css/main.efcb3d81.chunk.css"
+    "revision": "86c40f0e75d92e4c8a32",
+    "url": "/DoodleGuessing/static/css/main.ea472079.chunk.css"
   },
   {
     "revision": "d1a821c0f49b15064a07",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/DoodleGuessing/static/js/2.50231e12.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2e8ea13fffe25c75d661",
+    "revision": "86c40f0e75d92e4c8a32",
     "url": "/DoodleGuessing/static/js/main.0846adf1.chunk.js"
   },
   {
