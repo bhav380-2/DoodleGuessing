@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/DoodleGuessing/static/css/main.ea472079.chunk.css",
-    "main.js": "/DoodleGuessing/static/js/main.56ca5956.chunk.js",
-    "main.js.map": "/DoodleGuessing/static/js/main.56ca5956.chunk.js.map",
+    "main.js": "/DoodleGuessing/static/js/main.f8d1d29f.chunk.js",
+    "main.js.map": "/DoodleGuessing/static/js/main.f8d1d29f.chunk.js.map",
     "runtime-main.js": "/DoodleGuessing/static/js/runtime-main.f1d18561.js",
     "runtime-main.js.map": "/DoodleGuessing/static/js/runtime-main.f1d18561.js.map",
     "static/js/2.50231e12.chunk.js": "/DoodleGuessing/static/js/2.50231e12.chunk.js",
     "static/js/2.50231e12.chunk.js.map": "/DoodleGuessing/static/js/2.50231e12.chunk.js.map",
     "index.html": "/DoodleGuessing/index.html",
-    "precache-manifest.44699f0336e94239a36e1bd0c0c958d3.js": "/DoodleGuessing/precache-manifest.44699f0336e94239a36e1bd0c0c958d3.js",
+    "precache-manifest.897a00f554165d01196d1e5896851d5d.js": "/DoodleGuessing/precache-manifest.897a00f554165d01196d1e5896851d5d.js",
     "service-worker.js": "/DoodleGuessing/service-worker.js",
     "static/css/main.ea472079.chunk.css.map": "/DoodleGuessing/static/css/main.ea472079.chunk.css.map",
     "static/js/2.50231e12.chunk.js.LICENSE.txt": "/DoodleGuessing/static/js/2.50231e12.chunk.js.LICENSE.txt",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.f1d18561.js",
     "static/js/2.50231e12.chunk.js",
     "static/css/main.ea472079.chunk.css",
-    "static/js/main.56ca5956.chunk.js"
+    "static/js/main.f8d1d29f.chunk.js"
   ]
 }
